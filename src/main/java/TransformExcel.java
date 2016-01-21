@@ -7,6 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,8 +93,10 @@ public class TransformExcel {
                 }
                 //非日期格式,转换成String
                 //TODO 如果值为浮点型,可能会使数字失真
-                cell.setCellType(cell.CELL_TYPE_STRING);
-                return cell.getStringCellValue();
+                DecimalFormat df = new DecimalFormat("0.##");
+                String value = df.format(cell.getNumericCellValue());
+//                cell.setCellType(cell.CELL_TYPE_STRING);
+                return value;
             case XSSFCell.CELL_TYPE_STRING:
                 return cell.getStringCellValue();
             default:
