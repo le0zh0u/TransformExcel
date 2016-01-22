@@ -15,22 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by zhouchunjie on 16/1/21.
+ * Created by zhouchunjie on 16/1/22.
  */
-public class TransformExcel {
+public class TransformExcelUtil {
 
-    public final static void main(String[] args) {
-
-        String path = "src/main/resources/sample.xlsx";
-        try {
-            List<Map<String, String>> result = readXls(path);
-            System.out.print(result);
-        } catch (Exception e) {
-            System.out.print("读取失败");
-        }
-    }
-
-    private static List<Map<String, String>> readXls(String path) throws Exception {
+    public static List<Map<String, String>> readXls(String path) throws Exception {
         //载入文件
         InputStream is = new FileInputStream(path);
         XSSFWorkbook xssfWorkbook = new XSSFWorkbook(is);
@@ -95,7 +84,7 @@ public class TransformExcel {
                 //TODO 如果值为浮点型,可能会使数字失真
                 DecimalFormat df = new DecimalFormat("0.##");
                 String value = df.format(cell.getNumericCellValue());
-//                cell.setCellType(cell.CELL_TYPE_STRING);
+                //                cell.setCellType(cell.CELL_TYPE_STRING);
                 return value;
             case XSSFCell.CELL_TYPE_STRING:
                 return cell.getStringCellValue();
